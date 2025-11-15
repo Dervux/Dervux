@@ -88,39 +88,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Contact Form Submission
-    const contactForm = document.getElementById('contactForm');
-    const successMessage = document.getElementById('successMessage');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic form validation
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            if (!name || !email || !subject || !message) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            // In a real implementation, you would send the form data to the server here
-            // For demonstration, we'll just show the success message
-            contactForm.style.display = 'none';
-            successMessage.style.display = 'block';
-            
-            // Reset form after 5 seconds
-            setTimeout(() => {
-                contactForm.reset();
-                contactForm.style.display = 'block';
-                successMessage.style.display = 'none';
-            }, 5000);
-        });
-    }
-    
+    // Contact Form Submission (updated for GitHub Pages)
+const contactForm = document.getElementById('contactForm');
+const successMessage = document.getElementById('successMessage');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        if (!name || !email || !subject || !message) {
+            alert('Please fill in all fields');
+            return;
+        }
+        
+        // Create the email content
+        const emailBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0ASubject: ${subject}%0D%0AMessage: ${message}`;
+        
+        // Open user's email client with pre-filled content
+        window.location.href = `mailto:Dervux@protonmail.com?subject=Website Contact: ${subject}&body=${emailBody}`;
+        
+        // Show success message
+        contactForm.style.display = 'none';
+        successMessage.style.display = 'block';
+        
+        // Reset form after 5 seconds
+        setTimeout(() => {
+            contactForm.reset();
+            contactForm.style.display = 'block';
+            successMessage.style.display = 'none';
+        }, 5000);
+    });
+}    
     // Header scroll effect
     window.addEventListener('scroll', function() {
         const header = document.querySelector('.header');
