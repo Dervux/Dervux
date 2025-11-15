@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | Dervux</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>Dervux</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#importance">Why Websites Matter</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Payment Section -->
+    <section class="payment">
+        <div class="container">
+            <div class="payment-container">
+                <div class="payment-info">
+                    <h2>Complete Your Purchase</h2>
+                    <p>Thank you for choosing Dervux for your web development needs. Please complete your payment using the secure bank transfer method below.</p>
+                    
+                    <div class="payment-details">
+                        <h3>Bank Transfer Details</h3>
+                        <div class="detail-item">
+                            <span class="detail-label">Bank Name:</span>
+                            <span class="detail-value">Tymebank</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Account Holder:</span>
+                            <span class="detail-value">V Kubheka</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Account Number:</span>
+                            <span class="detail-value">51111678496</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Reference:</span>
+                            <span class="detail-value">Your Name/Company Name</span>
+                        </div>
+                    </div>
+                    
+                    <div class="security-notice">
+                        <h4>🔒 Secure Payment</h4>
+                        <p>Your payment information is protected with high-grade security measures. We never store sensitive banking details on our servers.</p>
+                    </div>
+                </div>
+                
+                <div class="payment-confirmation">
+                    <h3>Confirm Your Order</h3>
+                    <div class="order-summary">
+                        <div class="summary-item">
+                            <span>Selected Plan:</span>
+                            <span id="selectedPlan">Professional (R1000)</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span>Total Amount:</span>
+                            <span id="totalAmount">R1000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="confirmation-form">
+                        <div class="form-group">
+                            <label for="reference">Payment Reference</label>
+                            <input type="text" id="reference" placeholder="Your name or company name for reference">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="Your email for confirmation">
+                        </div>
+                        
+                        <div class="terms-agreement">
+                            <input type="checkbox" id="agreeTerms">
+                            <label for="agreeTerms">I agree to the <a href="#" id="termsLinkPayment">Terms & Conditions</a> and confirm that I will make the payment via bank transfer</label>
+                        </div>
+                        
+                        <button id="confirmPayment" class="btn-primary">Confirm Payment</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="paymentSuccess" class="success-message" style="display: none;">
+                <h3>Payment Confirmed!</h3>
+                <p>Thank you for your payment. We've sent a confirmation to your email. Our team will contact you within 24 hours to begin your project.</p>
+                <a href="index.html" class="btn-primary">Return to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Dervux</h3>
+                    <p>Professional web solutions to elevate your business in the digital world.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#importance">Why Websites Matter</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#" id="privacyLinkPayment">Privacy Policy</a></li>
+                        <li><a href="#" id="termsLinkPaymentFooter">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Dervux. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Privacy Policy</h2>
+            <div class="modal-body">
+                <!-- Same privacy policy content as index.html -->
+                <h3>Information We Collect</h3>
+                <p>We collect information you provide directly to us, such as when you create an account, use our services, or contact us for support. This may include:</p>
+                <ul>
+                    <li>Personal identification information (Name, email address, phone number)</li>
+                    <li>Business information</li>
+                    <li>Payment information</li>
+                    <li>Communication preferences</li>
+                </ul>
+                
+                <!-- Rest of privacy policy content -->
+            </div>
+        </div>
+    </div>
+
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Terms and Conditions</h2>
+            <div class="modal-body">
+                <!-- Same terms and conditions content as index.html -->
+                <h3>Agreement to Terms</h3>
+                <p>By accessing and using Dervux's services, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                
+                <!-- Rest of terms and conditions content -->
+            </div>
+        </div>
+    </div>
+
+    <script src="payment.js"></script>
+</body>
+</html>
