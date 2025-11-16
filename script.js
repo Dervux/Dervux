@@ -253,3 +253,47 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+// Hosting Option Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const hostingCheckboxes = document.querySelectorAll('.hosting-checkbox');
+    
+    hostingCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const plan = this.getAttribute('data-plan');
+            const basePrice = getBasePrice(plan);
+            const hostingFee = 50;
+            const totalPrice = this.checked ? basePrice + hostingFee : basePrice;
+            
+            // Update the button link with new price
+            const button = this.closest('.pricing-card').querySelector('a');
+            const currentHref = button.getAttribute('href');
+            const newHref = currentHref.replace(/amount=\d+/, `amount=${totalPrice}`) + (this.checked ? '&hosting=true' : '');
+            button.setAttribute('href', newHref);
+            
+            // Update price display temporarily
+            const priceElement = this.closest('.pricing-card').querySelector('.price');
+            const originalText = priceElement.textContent;
+            priceElement.textContent = `R${totalPrice}`;
+            priceElement.style.color = this.checked ? 'var(--success)' : 'var(--primary)';
+            
+            // Add first month hosting note if checked
+            const priceNote = this.closest('.pricing-card').querySelector('.price-note');
+            if (this.checked) {
+                priceNote.textContent = `R${basePrice} + R50 hosting`;
+                priceNote.style.color = 'var(--success)';
+            } else {
+                priceNote.textContent = 'one-time fee';
+                priceNote.style.color = 'var(--gray)';
+            }
+        });
+    });
+    
+    function getBasePrice(plan) {
+        switch(plan) {
+            case 'starter': return 550;
+            case 'professional': return 1000;
+            case 'premium': return 1500;
+            default: return 0;
+        }
+    }
+});
