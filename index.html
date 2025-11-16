@@ -120,59 +120,95 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <h2 class="section-title">Simple, Transparent Pricing</h2>
-            <p class="section-subtitle">Choose the plan that fits your business needs</p>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Starter</h3>
-                        <div class="price">R550</div>
-                    </div>
-                    <ul class="features">
-                        <li>1-Page Professional Website</li>
-                        <li>Mobile Responsive Design</li>
-                        <li>Basic SEO Optimization</li>
-                        <li>Contact Form Integration</li>
-                        <li>1 Round of Revisions</li>
-                    </ul>
-                    <a href="payment.html" class="btn-outline">Select Plan</a>
-                </div>
-                <div class="pricing-card featured">
-                    <div class="popular-badge">Most Popular</div>
-                    <div class="pricing-header">
-                        <h3>Professional</h3>
-                        <div class="price">R1000</div>
-                    </div>
-                    <ul class="features">
-                        <li>3-5 Page Custom Website</li>
-                        <li>Advanced Mobile Optimization</li>
-                        <li>Enhanced SEO Setup</li>
-                        <li>Contact Form & Social Media Integration</li>
-                        <li>3 Rounds of Revisions</li>
-                        <li>Basic Analytics Setup</li>
-                    </ul>
-                    <a href="payment.html" class="btn-primary">Select Plan</a>
-                </div>
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Premium</h3>
-                        <div class="price">R1500</div>
-                    </div>
-                    <ul class="features">
-                        <li>5-10 Page Advanced Website</li>
-                        <li>Premium Custom Design</li>
-                        <li>Comprehensive SEO Strategy</li>
-                        <li>E-commerce Functionality</li>
-                        <li>Unlimited Revisions</li>
-                        <li>Advanced Analytics & Reporting</li>
-                        <li>Priority Support</li>
-                    </ul>
-                    <a href="payment.html" class="btn-outline">Select Plan</a>
-                </div>
+<section id="pricing" class="pricing">
+    <div class="container">
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <p class="section-subtitle">Choose the plan that fits your business needs</p>
+        
+        <!-- Development Timeline Notice -->
+        <div class="timeline-notice">
+            <div class="timeline-icon">⚡</div>
+            <div class="timeline-content">
+                <h3>Fast Delivery: 2-3 Business Days</h3>
+                <p>Your website will be designed, developed, and ready for launch within 2-3 days after payment confirmation. We handle everything from design to deployment and ownership transfer.</p>
             </div>
         </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Starter</h3>
+                    <div class="price">R550</div>
+                    <div class="price-note">one-time fee</div>
+                </div>
+                <ul class="features">
+                    <li>1-Page Professional Website</li>
+                    <li>Mobile Responsive Design</li>
+                    <li>Basic SEO Optimization</li>
+                    <li>Contact Form Integration</li>
+                    <li>1 Round of Revisions</li>
+                    <li class="hosting-option">
+                        <label class="hosting-toggle">
+                            <input type="checkbox" class="hosting-checkbox" data-plan="starter">
+                            <span class="hosting-label">+ R50/month hosting</span>
+                        </label>
+                    </li>
+                </ul>
+                <a href="payment.html?plan=Starter&amount=550" class="btn-outline">Select Plan</a>
+            </div>
+            <div class="pricing-card featured">
+                <div class="popular-badge">Most Popular</div>
+                <div class="pricing-header">
+                    <h3>Professional</h3>
+                    <div class="price">R1000</div>
+                    <div class="price-note">one-time fee</div>
+                </div>
+                <ul class="features">
+                    <li>3-5 Page Custom Website</li>
+                    <li>Advanced Mobile Optimization</li>
+                    <li>Enhanced SEO Setup</li>
+                    <li>Contact Form & Social Media Integration</li>
+                    <li>3 Rounds of Revisions</li>
+                    <li>Basic Analytics Setup</li>
+                    <li class="hosting-option">
+                        <label class="hosting-toggle">
+                            <input type="checkbox" class="hosting-checkbox" data-plan="professional">
+                            <span class="hosting-label">+ R50/month hosting</span>
+                        </label>
+                    </li>
+                </ul>
+                <a href="payment.html?plan=Professional&amount=1000" class="btn-primary">Select Plan</a>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Premium</h3>
+                    <div class="price">R1500</div>
+                    <div class="price-note">one-time fee</div>
+                </div>
+                <ul class="features">
+                    <li>5-10 Page Advanced Website</li>
+                    <li>Premium Custom Design</li>
+                    <li>Comprehensive SEO Strategy</li>
+                    <li>E-commerce Functionality</li>
+                    <li>Unlimited Revisions</li>
+                    <li>Advanced Analytics & Reporting</li>
+                    <li>Priority Support</li>
+                    <li class="hosting-option">
+                        <label class="hosting-toggle">
+                            <input type="checkbox" class="hosting-checkbox" data-plan="premium">
+                            <span class="hosting-label">+ R50/month hosting</span>
+                        </label>
+                    </li>
+                </ul>
+                <a href="payment.html?plan=Premium&amount=1500" class="btn-outline">Select Plan</a>
+            </div>
+        </div>
+        
+        <div class="hosting-explanation">
+            <h4>💡 About Hosting</h4>
+            <p><strong>Optional hosting at R50/month</strong> includes: 24/7 uptime monitoring, security updates, regular backups, and technical support. You can also choose to host with any provider you prefer.</p>
+        </div>
+    </div>
     </section>
 
     <!-- Contact Section -->
