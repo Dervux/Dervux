@@ -19,7 +19,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set plan and amount in the summary
     document.getElementById('selectedPlan').textContent = `${plan} (R${amount})`;
     document.getElementById('totalAmount').textContent = `R${amount}`;
+    // Handle hosting option from URL
+const urlParams = new URLSearchParams(window.location.search);
+const hosting = urlParams.get('hosting') === 'true';
+
+if (hosting) {
+    // Update the order summary to show hosting
+    const selectedPlan = document.getElementById('selectedPlan');
+    const totalAmount = document.getElementById('totalAmount');
     
+    const baseText = selectedPlan.textContent;
+    selectedPlan.textContent = `${baseText} + Hosting`;
+    
+    const baseAmount = parseInt(totalAmount.textContent.replace('R', ''));
+    totalAmount.textContent = `R${baseAmount + 50}`;
+    
+    // Add hosting note to payment details
+    const paymentDetails = document.querySelector('.payment-details');
+    const hostingNote = document.createElement('div');
+    hostingNote.className = 'detail-item';
+    hostingNote.innerHTML = `
+        <span class="detail-label">Monthly Hosting:</span>
+        <span class="detail-value">R50/month</span>
+    `;
+    paymentDetails.appendChild(hostingNote);
+    }
     // Payment Confirmation
     const confirmPayment = document.getElementById('confirmPayment');
     const paymentSuccess = document.getElementById('paymentSuccess');
