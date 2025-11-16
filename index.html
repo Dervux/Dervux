@@ -124,7 +124,53 @@
     <div class="container">
         <h2 class="section-title">Simple, Transparent Pricing</h2>
         <p class="section-subtitle">Choose the plan that fits your business needs</p>
+        <!-- Real Customer Testimonials Section -->
+<section id="testimonials" class="testimonials">
+    <div class="container">
+        <h2 class="section-title">Hear From Real Customers</h2>
+        <p class="section-subtitle">See what businesses like yours are saying about their experience</p>
         
+        <div class="testimonials-grid" id="testimonialsContainer">
+            <!-- Testimonials will be loaded here automatically -->
+        </div>
+        
+        <div class="testimonials-cta">
+            <h3>Share Your Experience</h3>
+            <p>Help other businesses make the right choice by sharing your story</p>
+            <button id="addTestimonialBtn" class="btn-primary">Write a Review</button>
+        </div>
+    </div>
+</section>
+
+<!-- Add Testimonial Modal -->
+<div id="testimonialModal" class="testimonial-modal">
+    <div class="testimonial-modal-content">
+        <div class="testimonial-modal-header">
+            <h3>Share Your Experience</h3>
+            <button class="testimonial-modal-close">&times;</button>
+        </div>
+        <div class="rating-section">
+            <p>How would you rate our service?</p>
+            <div class="testimonial-modal-stars">
+                <span class="testimonial-modal-star" data-rating="1">☆</span>
+                <span class="testimonial-modal-star" data-rating="2">☆</span>
+                <span class="testimonial-modal-star" data-rating="3">☆</span>
+                <span class="testimonial-modal-star" data-rating="4">☆</span>
+                <span class="testimonial-modal-star" data-rating="5">☆</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="testimonialName">Your Name/Business *</label>
+            <input type="text" id="testimonialName" placeholder="e.g., Sarah from Beauty Salon" required>
+        </div>
+        <div class="form-group">
+            <label for="testimonialText">Your Review *</label>
+            <textarea id="testimonialText" placeholder="Tell others about your experience with our service..." rows="4" required></textarea>
+        </div>
+        <button id="submitTestimonial" class="btn-primary">Submit Review</button>
+        <p class="privacy-note">Your review will be visible to other visitors</p>
+    </div>
+                    </div>
         <!-- Development Timeline Notice -->
         <div class="timeline-notice">
             <div class="timeline-icon">⚡</div>
