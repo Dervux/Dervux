@@ -135,3 +135,121 @@ if (contactForm) {
         }
     });
 });
+// Feedback Widget Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const feedbackWidget = document.getElementById('feedbackWidget');
+    const feedbackToggle = document.getElementById('feedbackToggle');
+    const feedbackContent = document.querySelector('.feedback-content');
+    const feedbackClose = document.getElementById('feedbackClose');
+    const stars = document.querySelectorAll('.star');
+    const submitFeedback = document.getElementById('submitFeedback');
+    const feedbackThankYou = document.getElementById('feedbackThankYou');
+    const userComment = document.getElementById('userComment');
+    
+    let currentRating = 0;
+    
+    // Toggle feedback widget
+    if (feedbackToggle) {
+        feedbackToggle.addEventListener('click', function() {
+            feedbackContent.classList.toggle('active');
+        });
+    }
+    
+    // Close feedback widget
+    if (feedbackClose) {
+        feedbackClose.addEventListener('click', function() {
+            feedbackContent.classList.remove('active');
+        });
+    }
+    
+    // Star rating functionality
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            currentRating = rating;
+            
+            // Update stars appearance
+            stars.forEach(s => {
+                const starRating = parseInt(s.getAttribute('data-rating'));
+                if (starRating <= rating) {
+                    s.classList.add('active');
+                    s.textContent = '★';
+                } else {
+                    s.classList.remove('active');
+                    s.textContent = '☆';
+                }
+            });
+        });
+        
+        // Hover effects
+        star.addEventListener('mouseenter', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            stars.forEach(s => {
+                const starRating = parseInt(s.getAttribute('data-rating'));
+                if (starRating <= rating) {
+                    s.style.color = '#ffc107';
+                }
+            });
+        });
+        
+        star.addEventListener('mouseleave', function() {
+            stars.forEach(s => {
+                if (!s.classList.contains('active')) {
+                    s.style.color = '#ddd';
+                }
+            });
+        });
+    });
+    
+    // Submit feedback
+    if (submitFeedback) {
+        submitFeedback.addEventListener('click', function() {
+            if (currentRating === 0) {
+                alert('Please select a rating before submitting');
+                return;
+            }
+            
+            const comment = userComment.value.trim();
+            
+            // In a real implementation, you would send this data to your server
+            // For now, we'll log it and show thank you message
+            console.log('Feedback submitted:', {
+                rating: currentRating,
+                comment: comment,
+                timestamp: new Date().toISOString(),
+                page: window.location.href
+            });
+            
+            // Send to your email (optional)
+            const feedbackBody = `Rating: ${currentRating}/5%0D%0AComment: ${comment}%0D%0APage: ${window.location.href}`;
+            window.location.href = `mailto:Dervux@protonmail.com?subject=Website Feedback (${currentRating}/5)&body=${feedbackBody}`;
+            
+            // Show thank you message
+            feedbackContent.style.display = 'none';
+            feedbackThankYou.style.display = 'block';
+            
+            // Reset after 3 seconds
+            setTimeout(() => {
+                feedbackContent.classList.remove('active');
+                feedbackThankYou.style.display = 'none';
+                feedbackContent.style.display = 'block';
+                
+                // Reset form
+                currentRating = 0;
+                userComment.value = '';
+                stars.forEach(star => {
+                    star.classList.remove('active');
+                    star.textContent = '☆';
+                    star.style.color = '#ddd';
+                });
+            }, 3000);
+        });
+    }
+    
+    // Close when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!feedbackWidget.contains(event.target) && feedbackContent.classList.contains('active')) {
+            feedbackContent.classList.remove('active');
+        }
+    });
+});
