@@ -355,5 +355,36 @@
     </div>
 
     <script src="script.js"></script>
+    <!-- Rating & Feedback Widget -->
+<div id="feedbackWidget" class="feedback-widget">
+    <button id="feedbackToggle" class="feedback-toggle">
+        <span>💬</span>
+    </button>
+    <div class="feedback-content">
+        <div class="feedback-header">
+            <h3>Share Your Feedback</h3>
+            <button id="feedbackClose" class="feedback-close">&times;</button>
+        </div>
+        <div class="rating-section">
+            <p>How would you rate our website?</p>
+            <div class="stars">
+                <span class="star" data-rating="1">☆</span>
+                <span class="star" data-rating="2">☆</span>
+                <span class="star" data-rating="3">☆</span>
+                <span class="star" data-rating="4">☆</span>
+                <span class="star" data-rating="5">☆</span>
+            </div>
+        </div>
+        <div class="comment-section">
+            <label for="userComment">Your comments (optional):</label>
+            <textarea id="userComment" placeholder="What did you like or how can we improve?"></textarea>
+        </div>
+        <button id="submitFeedback" class="btn-primary">Submit Feedback</button>
+        <div id="feedbackThankYou" class="feedback-thankyou" style="display: none;">
+            <h4>Thank You! 💫</h4>
+            <p>Your feedback helps us improve.</p>
+        </div>
+    </div>
+</div>
 </body>
 </html>
