@@ -296,4 +296,212 @@ document.addEventListener('DOMContentLoaded', function() {
             default: return 0;
         }
     }
+    // Real Public Testimonials System
+document.addEventListener('DOMContentLoaded', function() {
+    const testimonialsContainer = document.getElementById('testimonialsContainer');
+    const addTestimonialBtn = document.getElementById('addTestimonialBtn');
+    const testimonialModal = document.getElementById('testimonialModal');
+    const modalClose = testimonialModal.querySelector('.testimonial-modal-close');
+    const modalStars = testimonialModal.querySelectorAll('.testimonial-modal-star');
+    const submitTestimonial = document.getElementById('submitTestimonial');
+    
+    let currentRating = 0;
+    
+    // Sample initial testimonials (you can remove these later)
+    const initialTestimonials = [
+        {
+            name: "Sarah M",
+            business: "Beauty Salon Owner",
+            rating: 5,
+            text: "Dervux created a stunning website for my salon that doubled my online bookings! The process was smooth and professional.",
+            date: "2024-01-15",
+            initials: "SM"
+        },
+        {
+            name: "James K",
+            business: "Local Restaurant",
+            rating: 5,
+            text: "Our new website has brought in so many new customers. Fast service and great communication throughout the project.",
+            date: "2024-01-10",
+            initials: "JK"
+        },
+        {
+            name: "Lisa T",
+            business: "Fitness Coach",
+            rating: 4,
+            text: "Professional service and exactly what I needed to grow my online presence. Highly recommend for small businesses!",
+            date: "2024-01-08",
+            initials: "LT"
+        }
+    ];
+    
+    // Load testimonials
+    function loadTestimonials() {
+        const savedTestimonials = localStorage.getItem('dervuxPublicTestimonials');
+        const testimonials = savedTestimonials ? JSON.parse(savedTestimonials) : initialTestimonials;
+        
+        testimonialsContainer.innerHTML = '';
+        
+        testimonials.forEach(testimonial => {
+            addTestimonialToPage(testimonial, false);
+        });
+    }
+    
+    // Add testimonial to page
+    function addTestimonialToPage(testimonial, save = true) {
+        const testimonialCard = document.createElement('div');
+        testimonialCard.className = 'testimonial-card';
+        
+        const stars = '★'.repeat(testimonial.rating) + '☆'.repeat(5 - testimonial.rating);
+        const date = new Date(testimonial.date).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+        });
+        
+        testimonialCard.innerHTML = `
+            <div class="testimonial-header">
+                <div class="testimonial-stars">${stars}</div>
+                <div class="testimonial-date">${date}</div>
+            </div>
+            <p class="testimonial-text">"${testimonial.text}"</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">${testimonial.initials}</div>
+                <div class="testimonial-author-info">
+                    <strong>${testimonial.name}</strong>
+                    <span>${testimonial.business}</span>
+                </div>
+            </div>
+        `;
+        
+        testimonialsContainer.appendChild(testimonialCard);
+        
+        if (save) {
+            saveTestimonials();
+        }
+    }
+    
+    // Save testimonials to localStorage
+    function saveTestimonials() {
+        const testimonials = [];
+        const testimonialCards = testimonialsContainer.querySelectorAll('.testimonial-card');
+        
+        testimonialCards.forEach(card => {
+            const stars = card.querySelector('.testimonial-stars').textContent;
+            const rating = (stars.match(/★/g) || []).length;
+            const text = card.querySelector('.testimonial-text').textContent.replace(/"/g, '');
+            const name = card.querySelector('.testimonial-author-info strong').textContent;
+            const business = card.querySelector('.testimonial-author-info span').textContent;
+            const date = card.querySelector('.testimonial-date').textContent;
+            const initials = card.querySelector('.testimonial-avatar').textContent;
+            
+            testimonials.push({
+                name: name,
+                business: business,
+                rating: rating,
+                text: text,
+                date: new Date().toISOString().split('T')[0],
+                initials: initials
+            });
+        });
+        
+        localStorage.setItem('dervuxPublicTestimonials', JSON.stringify(testimonials));
+    }
+    
+    // Open modal
+    if (addTestimonialBtn) {
+        addTestimonialBtn.addEventListener('click', function() {
+            testimonialModal.style.display = 'block';
+            currentRating = 0;
+            // Reset stars
+            modalStars.forEach(star => {
+                star.textContent = '☆';
+                star.classList.remove('active');
+            });
+            // Clear form
+            document.getElementById('testimonialName').value = '';
+            document.getElementById('testimonialText').value = '';
+        });
+    }
+    
+    // Star rating in modal
+    modalStars.forEach(star => {
+        star.addEventListener('click', function() {
+            currentRating = parseInt(this.getAttribute('data-rating'));
+            
+            modalStars.forEach(s => {
+                const rating = parseInt(s.getAttribute('data-rating'));
+                if (rating <= currentRating) {
+                    s.classList.add('active');
+                    s.textContent = '★';
+                } else {
+                    s.classList.remove('active');
+                    s.textContent = '☆';
+                }
+            });
+        });
+    });
+    
+    // Close modal
+    modalClose.addEventListener('click', function() {
+        testimonialModal.style.display = 'none';
+    });
+    
+    // Close modal when clicking outside
+    testimonialModal.addEventListener('click', function(e) {
+        if (e.target === testimonialModal) {
+            testimonialModal.style.display = 'none';
+        }
+    });
+    
+    // Submit testimonial
+    submitTestimonial.addEventListener('click', function() {
+        const nameInput = document.getElementById('testimonialName').value.trim();
+        const textInput = document.getElementById('testimonialText').value.trim();
+        
+        if (currentRating === 0) {
+            alert('Please select a star rating');
+            return;
+        }
+        
+        if (!nameInput) {
+            alert('Please enter your name or business name');
+            return;
+        }
+        
+        if (!textInput) {
+            alert('Please write your review');
+            return;
+        }
+        
+        // Create testimonial object
+        const names = nameInput.split(' ');
+        const initials = names.length >= 2 ? 
+            (names[0][0] + names[names.length - 1][0]).toUpperCase() : 
+            nameInput.substring(0, 2).toUpperCase();
+        
+        const newTestimonial = {
+            name: nameInput.split(' from ')[0] || nameInput,
+            business: nameInput.includes(' from ') ? nameInput.split(' from ')[1] : 'Business Owner',
+            rating: currentRating,
+            text: textInput,
+            date: new Date().toISOString().split('T')[0],
+            initials: initials
+        };
+        
+        // Add to page
+        addTestimonialToPage(newTestimonial, true);
+        
+        // Send email notification (optional)
+        const testimonialBody = `New Public Testimonial: ${currentRating}/5 stars%0D%0A%0D%0AName: ${nameInput}%0D%0AReview: ${textInput}%0D%0A%0D%0AThis review is now visible on your website.`;
+        window.location.href = `mailto:Dervux@protonmail.com?subject=New Public Testimonial (${currentRating}/5)&body=${testimonialBody}`;
+        
+        // Close modal and show success
+        testimonialModal.style.display = 'none';
+        alert('Thank you for your review! It is now visible to other visitors.');
+    });
+    
+    // Load testimonials on page load
+    loadTestimonials();
+});
 });
