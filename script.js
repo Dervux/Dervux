@@ -504,4 +504,103 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load testimonials on page load
     loadTestimonials();
 });
+    // Delay Guarantee System
+const delayNotification = document.getElementById('delayNotification');
+const closeNotification = document.getElementById('closeNotification');
+const discountCode = document.getElementById('discountCode');
+
+// Function to generate random discount code
+function generateDiscountCode() {
+    const prefix = 'DERVUX';
+    const numbers = Math.floor(100 + Math.random() * 900); // 3 random digits
+    return `${prefix}${numbers}`;
+}
+
+// Check if there's a delayed project (for demonstration)
+// In real implementation, this would check your project management system
+function checkForDelays() {
+    // Simulate checking for delays (remove this in production)
+    const hasDelayedProject = localStorage.getItem('simulateDelay') === 'true';
+    
+    if (hasDelayedProject) {
+        showDelayNotification();
+        localStorage.removeItem('simulateDelay'); // Clear after showing
+    }
+    
+    // Check URL parameters for delay notification
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('delay') === 'true') {
+        showDelayNotification();
+    }
+}
+
+function showDelayNotification() {
+    const newDiscountCode = generateDiscountCode();
+    discountCode.textContent = newDiscountCode;
+    delayNotification.style.display = 'block';
+    
+    // Save to localStorage so user can access it later
+    localStorage.setItem('dervuxDiscountCode', newDiscountCode);
+    localStorage.setItem('dervuxDiscountExpiry', new Date().getTime() + (60 * 24 * 60 * 60 * 1000)); // 60 days
+    
+    // Auto-hide after 30 seconds
+    setTimeout(() => {
+        if (delayNotification.style.display === 'block') {
+            delayNotification.style.display = 'none';
+        }
+    }, 30000);
+}
+
+// Close notification
+if (closeNotification) {
+    closeNotification.addEventListener('click', function() {
+        delayNotification.style.display = 'none';
+    });
+}
+
+// Check for active discount code on page load
+function checkActiveDiscount() {
+    const savedCode = localStorage.getItem('dervuxDiscountCode');
+    const expiry = localStorage.getItem('dervuxDiscountExpiry');
+    
+    if (savedCode && expiry && new Date().getTime() < parseInt(expiry)) {
+        // Discount is still valid
+        console.log('Active discount code:', savedCode);
+        // You could show a small indicator that user has an active discount
+    } else if (savedCode) {
+        // Discount expired, clean up
+        localStorage.removeItem('dervuxDiscountCode');
+        localStorage.removeItem('dervuxDiscountExpiry');
+    }
+}
+
+// For testing: Add this to simulate a delay (remove in production)
+function addDelayTestButton() {
+    const testButton = document.createElement('button');
+    testButton.textContent = 'Test Delay Notification';
+    testButton.style.position = 'fixed';
+    testButton.style.bottom = '100px';
+    testButton.style.right = '20px';
+    testButton.style.zIndex = '1000';
+    testButton.style.padding = '10px';
+    testButton.style.background = '#ff6b6b';
+    testButton.style.color = 'white';
+    testButton.style.border = 'none';
+    testButton.style.borderRadius = '5px';
+    testButton.style.cursor = 'pointer';
+    testButton.addEventListener('click', function() {
+        localStorage.setItem('simulateDelay', 'true');
+        showDelayNotification();
+    });
+    
+    // Only add in development (remove this in production)
+    if (window.location.hostname === 'localhost' || window.location.hostname.includes('github.io')) {
+        document.body.appendChild(testButton);
+    }
+}
+
+// Initialize guarantee system
+checkForDelays();
+checkActiveDiscount();
+addDelayTestButton(); // Remove this line in production
 });
