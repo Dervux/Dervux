@@ -322,7 +322,84 @@
             </div>
         </div>
     </section>
-
+<!-- Booking System -->
+<section id="booking" class="booking">
+    <div class="container">
+        <h2 class="section-title">Book Your Free Consultation</h2>
+        <p class="section-subtitle">Schedule a free 30-minute call to discuss your website needs</p>
+        
+        <div class="booking-container">
+            <div class="booking-info">
+                <h3>What to Expect:</h3>
+                <ul>
+                    <li>✅ Free website assessment</li>
+                    <li>✅ Personalized quote</li>
+                    <li>✅ Timeline discussion</li>
+                    <li>✅ Q&A session</li>
+                </ul>
+                <div class="booking-contact">
+                    <p><strong>Prefer to call directly?</strong></p>
+                    <p>📞 +27 68 198 3885</p>
+                    <p>📧 Dervux@protonmail.com</p>
+                </div>
+            </div>
+            
+            <div class="booking-form-container">
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-group">
+                        <label for="bookingName">Full Name *</label>
+                        <input type="text" id="bookingName" name="bookingName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingEmail">Email Address *</label>
+                        <input type="email" id="bookingEmail" name="bookingEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingPhone">Phone Number *</label>
+                        <input type="tel" id="bookingPhone" name="bookingPhone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingBusiness">Business Name</label>
+                        <input type="text" id="bookingBusiness" name="bookingBusiness" placeholder="Your business name (if applicable)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingDate">Preferred Date *</label>
+                        <input type="date" id="bookingDate" name="bookingDate" required min="<?php echo date('Y-m-d'); ?>">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingTime">Preferred Time *</label>
+                        <select id="bookingTime" name="bookingTime" required>
+                            <option value="">Select a time</option>
+                            <option value="09:00">09:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="14:00">02:00 PM</option>
+                            <option value="15:00">03:00 PM</option>
+                            <option value="16:00">04:00 PM</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingMessage">Project Details</label>
+                        <textarea id="bookingMessage" name="bookingMessage" rows="4" placeholder="Briefly describe your website needs..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Book Free Consultation</button>
+                </form>
+                
+                <div id="bookingSuccess" class="success-message" style="display: none;">
+                    <h3>✅ Booking Confirmed!</h3>
+                    <p>Thank you for booking your consultation. We've sent a confirmation to your email and will call you at your scheduled time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
