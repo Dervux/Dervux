@@ -574,35 +574,6 @@ function checkActiveDiscount() {
     }
 }
 
-// For testing: Add this to simulate a delay (remove in production)
-function addDelayTestButton() {
-    const testButton = document.createElement('button');
-    testButton.textContent = 'Test Delay Notification';
-    testButton.style.position = 'fixed';
-    testButton.style.bottom = '100px';
-    testButton.style.right = '20px';
-    testButton.style.zIndex = '1000';
-    testButton.style.padding = '10px';
-    testButton.style.background = '#ff6b6b';
-    testButton.style.color = 'white';
-    testButton.style.border = 'none';
-    testButton.style.borderRadius = '5px';
-    testButton.style.cursor = 'pointer';
-    testButton.addEventListener('click', function() {
-        localStorage.setItem('simulateDelay', 'true');
-        showDelayNotification();
-    });
-    
-    // Only add in development (remove this in production)
-    if (window.location.hostname === 'localhost' || window.location.hostname.includes('github.io')) {
-        document.body.appendChild(testButton);
-    }
-}
-
-// Initialize guarantee system
-checkForDelays();
-checkActiveDiscount();
-addDelayTestButton(); // Remove this line in production
 });// Booking System
 const bookingForm = document.getElementById('bookingForm');
 const bookingSuccess = document.getElementById('bookingSuccess');
