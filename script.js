@@ -603,4 +603,61 @@ function addDelayTestButton() {
 checkForDelays();
 checkActiveDiscount();
 addDelayTestButton(); // Remove this line in production
-});
+});// Booking System
+const bookingForm = document.getElementById('bookingForm');
+const bookingSuccess = document.getElementById('bookingSuccess');
+
+if (bookingForm) {
+    bookingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const name = document.getElementById('bookingName').value;
+        const email = document.getElementById('bookingEmail').value;
+        const phone = document.getElementById('bookingPhone').value;
+        const business = document.getElementById('bookingBusiness').value;
+        const date = document.getElementById('bookingDate').value;
+        const time = document.getElementById('bookingTime').value;
+        const message = document.getElementById('bookingMessage').value;
+        
+        // Basic validation
+        if (!name || !email || !phone || !date || !time) {
+            alert('Please fill in all required fields');
+            return;
+        }
+        
+        // Create booking email
+        const bookingBody = `New Consultation Booking:%0D%0A%0D%0A` +
+                           `Name: ${name}%0D%0A` +
+                           `Email: ${email}%0D%0A` +
+                           `Phone: ${phone}%0D%0A` +
+                           `Business: ${business || 'Not provided'}%0D%0A` +
+                           `Date: ${date}%0D%0A` +
+                           `Time: ${time}%0D%0A` +
+                           `Project Details: ${message || 'Not provided'}%0D%0A%0D%0A` +
+                           `Booking received: ${new Date().toLocaleString()}`;
+        
+        // Send booking email
+        window.location.href = `mailto:Dervux@protonmail.com?subject=New Consultation Booking - ${name}&body=${bookingBody}`;
+        
+        // Show success message
+        bookingForm.style.display = 'none';
+        bookingSuccess.style.display = 'block';
+        
+        // Save to localStorage (simple CRM)
+        const booking = {
+            name: name,
+            email: email,
+            phone: phone,
+            business: business,
+            date: date,
+            time: time,
+            message: message,
+            timestamp: new Date().toISOString()
+        };
+        
+        const bookings = JSON.parse(localStorage.getItem('dervuxBookings') || '[]');
+        bookings.push(booking);
+        localStorage.setItem('dervuxBookings', JSON.stringify(bookings));
+    });
+                                 }
