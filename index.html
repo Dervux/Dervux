@@ -124,53 +124,7 @@
     <div class="container">
         <h2 class="section-title">Simple, Transparent Pricing</h2>
         <p class="section-subtitle">Choose the plan that fits your business needs</p>
-        <!-- Real Customer Testimonials Section -->
-<section id="testimonials" class="testimonials">
-    <div class="container">
-        <h2 class="section-title">Hear From Real Customers</h2>
-        <p class="section-subtitle">See what businesses like yours are saying about their experience</p>
         
-        <div class="testimonials-grid" id="testimonialsContainer">
-            <!-- Testimonials will be loaded here automatically -->
-        </div>
-        
-        <div class="testimonials-cta">
-            <h3>Share Your Experience</h3>
-            <p>Help other businesses make the right choice by sharing your story</p>
-            <button id="addTestimonialBtn" class="btn-primary">Write a Review</button>
-        </div>
-    </div>
-</section>
-
-<!-- Add Testimonial Modal -->
-<div id="testimonialModal" class="testimonial-modal">
-    <div class="testimonial-modal-content">
-        <div class="testimonial-modal-header">
-            <h3>Share Your Experience</h3>
-            <button class="testimonial-modal-close">&times;</button>
-        </div>
-        <div class="rating-section">
-            <p>How would you rate our service?</p>
-            <div class="testimonial-modal-stars">
-                <span class="testimonial-modal-star" data-rating="1">☆</span>
-                <span class="testimonial-modal-star" data-rating="2">☆</span>
-                <span class="testimonial-modal-star" data-rating="3">☆</span>
-                <span class="testimonial-modal-star" data-rating="4">☆</span>
-                <span class="testimonial-modal-star" data-rating="5">☆</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="testimonialName">Your Name/Business *</label>
-            <input type="text" id="testimonialName" placeholder="e.g., Sarah from Beauty Salon" required>
-        </div>
-        <div class="form-group">
-            <label for="testimonialText">Your Review *</label>
-            <textarea id="testimonialText" placeholder="Tell others about your experience with our service..." rows="4" required></textarea>
-        </div>
-        <button id="submitTestimonial" class="btn-primary">Submit Review</button>
-        <p class="privacy-note">Your review will be visible to other visitors</p>
-    </div>
-                    </div>
         <!-- Development Timeline Notice -->
         <div class="timeline-notice">
             <div class="timeline-icon">⚡</div>
@@ -179,14 +133,16 @@
                 <p>Your website will be designed, developed, and ready for launch within 2-3 days after payment confirmation. We handle everything from design to deployment and ownership transfer.</p>
             </div>
         </div>
-<!-- Fast Delivery Guarantee -->
-<div class="guarantee-section">
-    <div class="guarantee-badge">🚀</div>
-    <div class="guarantee-content">
-        <h3>On-Time Launch Guarantee</h3>
-        <p>If your website isn't launched within 3 business days, we'll send you a <strong>30% discount code</strong> for your next project with us. We're committed to delivering on our promises.</p>
-    </div>
-</div>
+
+        <!-- Security Guarantee -->
+        <div class="security-guarantee">
+            <div class="security-badge">🛡️</div>
+            <div class="security-content">
+                <h3>Built-in Security Included</h3>
+                <p><strong>No extra costs for security!</strong> All our websites include essential security features at no additional charge. Your website's protection is our standard, not an upsell.</p>
+            </div>
+        </div>
+
         <div class="pricing-grid">
             <div class="pricing-card">
                 <div class="pricing-header">
@@ -200,6 +156,7 @@
                     <li>Basic SEO Optimization</li>
                     <li>Contact Form Integration</li>
                     <li>1 Round of Revisions</li>
+                    <li>✅ <strong>Basic Security Features</strong></li>
                     <li class="hosting-option">
                         <label class="hosting-toggle">
                             <input type="checkbox" class="hosting-checkbox" data-plan="starter">
@@ -223,6 +180,7 @@
                     <li>Contact Form & Social Media Integration</li>
                     <li>3 Rounds of Revisions</li>
                     <li>Basic Analytics Setup</li>
+                    <li>✅ <strong>Enhanced Security Features</strong></li>
                     <li class="hosting-option">
                         <label class="hosting-toggle">
                             <input type="checkbox" class="hosting-checkbox" data-plan="professional">
@@ -246,6 +204,7 @@
                     <li>Unlimited Revisions</li>
                     <li>Advanced Analytics & Reporting</li>
                     <li>Priority Support</li>
+                    <li>✅ <strong>Advanced Security Suite</strong></li>
                     <li class="hosting-option">
                         <label class="hosting-toggle">
                             <input type="checkbox" class="hosting-checkbox" data-plan="premium">
@@ -257,12 +216,35 @@
             </div>
         </div>
         
+        <div class="security-features">
+            <h4>🔒 Security Features Included in All Plans</h4>
+            <div class="security-grid">
+                <div class="security-item">
+                    <span class="security-icon">🛡️</span>
+                    <span>Secure Code Structure</span>
+                </div>
+                <div class="security-item">
+                    <span class="security-icon">🔐</span>
+                    <span>Form Protection</span>
+                </div>
+                <div class="security-item">
+                    <span class="security-icon">🛡️</span>
+                    <span>Mobile Security</span>
+                </div>
+                <div class="security-item">
+                    <span class="security-icon">🔒</span>
+                    <span>Regular Security Updates</span>
+                </div>
+            </div>
+            <p class="security-note"><strong>No hidden security costs</strong> - Protection is built into every website we create</p>
+        </div>
+        
         <div class="hosting-explanation">
             <h4>💡 About Hosting</h4>
             <p><strong>Optional hosting at R50/month</strong> includes: 24/7 uptime monitoring, security updates, regular backups, and technical support. You can also choose to host with any provider you prefer.</p>
         </div>
     </div>
-    </section>
+</section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
