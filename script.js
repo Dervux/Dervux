@@ -9,6 +9,300 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
+            // Live Comments Display System
+    const liveComments = document.getElementById('liveComments');
+    const commentsContainer = document.getElementById('commentsContainer');
+    const closeComments = document.getElementById('closeComments');
+    const addCommentBtn = document.getElementById('addCommentBtn');
+    
+    // Create toggle button
+    const commentsToggle = document.createElement('button');
+    commentsToggle.className = 'comments-toggle';
+    commentsToggle.innerHTML = '💬';
+    commentsToggle.title = 'Show Recent Reviews';
+    document.body.appendChild(commentsToggle);
+    
+    // Sample initial comments (replace with real ones from localStorage)
+    const initialComments = [
+        {
+            id: 1,
+            author: "Sarah M.",
+            rating: 5,
+            text: "Fast service and professional results! My website was ready in 2 days.",
+            date: "2024-01-15",
+            time: "14:30"
+        },
+        {
+            id: 2,
+            author: "James K.",
+            rating: 4,
+            text: "Great value for money. The mobile optimization is perfect.",
+            date: "2024-01-14",
+            time: "10:15"
+        },
+        {
+            id: 3,
+            author: "Lisa T.",
+            rating: 5,
+            text: "Highly recommend for small businesses. Excellent support!",
+            date: "2024-01-13",
+            time: "16:45"
+        }
+    ];
+    
+    // Load comments
+    function loadComments() {
+        const savedComments = localStorage.getItem('dervuxLiveComments');
+        const comments = savedComments ? JSON.parse(savedComments) : initialComments;
+        
+        commentsContainer.innerHTML = '';
+        
+        if (comments.length === 0) {
+            commentsContainer.innerHTML = `
+                <div class="empty-comments">
+                    <p>No reviews yet. Be the first to share your experience!</p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Display only last 5 comments
+        const recentComments = comments.slice(-5).reverse();
+        
+        recentComments.forEach(comment => {
+            addCommentToDisplay(comment);
+        });
+    }
+    
+    // Add comment to display
+    function addCommentToDisplay(comment) {
+        const commentElement = document.createElement('div');
+        commentElement.className = 'comment-item';
+        commentElement.dataset.id = comment.id;
+        
+        const stars = '★'.repeat(comment.rating) + '☆'.repeat(5 - comment.rating);
+        const timeAgo = getTimeAgo(comment.date, comment.time);
+        
+        commentElement.innerHTML = `
+            <div class="comment-header">
+                <div class="comment-author">${comment.author}</div>
+                <div class="comment-date">${timeAgo}</div>
+            </div>
+            <div class="comment-rating">${stars}</div>
+            <p class="comment-text">${comment.text}</p>
+            <div class="comment-actions">
+                <button class="delete-comment" data-id="${comment.id}">Remove</button>
+            </div>
+        `;
+        
+        commentsContainer.appendChild(commentElement);
+        
+        // Add delete functionality
+        const deleteBtn = commentElement.querySelector('.delete-comment');
+        deleteBtn.addEventListener('click', function() {
+            deleteComment(comment.id);
+        });
+    }
+    
+    // Get time ago format
+    function getTimeAgo(date, time) {
+        const commentDate = new Date(`${date}T${time}`);
+        const now = new Date();
+        const diffMs = now - commentDate;
+        const diffMins = Math.floor(diffMs / 60000);
+        const diffHours = Math.floor(diffMins / 60);
+        const diffDays = Math.floor(diffHours / 24);
+        
+        if (diffMins < 60) {
+            return `${diffMins} min ago`;
+        } else if (diffHours < 24) {
+            return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+        } else {
+            return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+        }
+    }
+    
+    // Save comments
+    function saveComments(comments) {
+        localStorage.setItem('dervuxLiveComments', JSON.stringify(comments));
+    }
+    
+    // Add new comment
+    function addNewComment(author, rating, text) {
+        const comments = JSON.parse(localStorage.getItem('dervuxLiveComments') || '[]');
+        const newComment = {
+            id: Date.now(),
+            author: author || 'Anonymous',
+            rating: rating,
+            text: text,
+            date: new Date().toISOString().split('T')[0],
+            time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+        };
+        
+        comments.push(newComment);
+        saveComments(comments);
+        addCommentToDisplay(newComment);
+        
+        // Show success message
+        showCommentSuccess();
+    }
+    
+    // Delete comment
+    function deleteComment(id) {
+        let comments = JSON.parse(localStorage.getItem('dervuxLiveComments') || '[]');
+        comments = comments.filter(comment => comment.id !== id);
+        saveComments(comments);
+        
+        // Remove from display
+        const commentElement = document.querySelector(`.comment-item[data-id="${id}"]`);
+        if (commentElement) {
+            commentElement.style.animation = 'fadeOut 0.3s ease';
+            setTimeout(() => {
+                commentElement.remove();
+                loadComments(); // Reload to refresh display
+            }, 300);
+        }
+    }
+    
+    // Show success message
+    function showCommentSuccess() {
+        const successMsg = document.createElement('div');
+        successMsg.className = 'comment-success';
+        successMsg.textContent = 'Review added successfully!';
+        successMsg.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            z-index: 1006;
+            animation: slideInRight 0.3s ease;
+        `;
+        
+        document.body.appendChild(successMsg);
+        
+        setTimeout(() => {
+            successMsg.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => successMsg.remove(), 300);
+        }, 3000);
+    }
+    
+    // Add CSS animations for success message
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+        
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Toggle comments display
+    commentsToggle.addEventListener('click', function() {
+        liveComments.style.display = 'block';
+        commentsToggle.style.display = 'none';
+        loadComments();
+    });
+    
+    closeComments.addEventListener('click', function() {
+        liveComments.style.display = 'none';
+        commentsToggle.style.display = 'flex';
+    });
+    
+    // Add comment button - link to testimonials form
+    addCommentBtn.addEventListener('click', function() {
+        // Scroll to testimonials section
+        const testimonialsSection = document.getElementById('testimonials');
+        if (testimonialsSection) {
+            window.scrollTo({
+                top: testimonialsSection.offsetTop - 80,
+                behavior: 'smooth'
+            });
+            // Open the testimonial modal if it exists
+            const addTestimonialBtn = document.getElementById('addTestimonialBtn');
+            if (addTestimonialBtn) {
+                setTimeout(() => addTestimonialBtn.click(), 500);
+            }
+        }
+        
+        // Close comments panel
+        liveComments.style.display = 'none';
+        commentsToggle.style.display = 'flex';
+    });
+    
+    // Close comments when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!liveComments.contains(event.target) && 
+            !commentsToggle.contains(event.target) && 
+            liveComments.style.display === 'block') {
+            liveComments.style.display = 'none';
+            commentsToggle.style.display = 'flex';
+        }
+    });
+    
+    // Auto-hide comments after 30 seconds
+    let commentsTimeout;
+    function startCommentsTimeout() {
+        clearTimeout(commentsTimeout);
+        commentsTimeout = setTimeout(() => {
+            if (liveComments.style.display === 'block') {
+                liveComments.style.display = 'none';
+                commentsToggle.style.display = 'flex';
+            }
+        }, 30000); // 30 seconds
+    }
+    
+    // Reset timeout on interaction
+    liveComments.addEventListener('mouseenter', function() {
+        clearTimeout(commentsTimeout);
+    });
+    
+    liveComments.addEventListener('mouseleave', function() {
+        startCommentsTimeout();
+    });
+    
+    // Initialize comments system
+    loadComments();
+    startCommentsTimeout();
+    
+    // Sync with testimonials system
+    function syncWithTestimonials() {
+        // This function would sync comments with your existing testimonials
+        // For now, we'll just load comments on page load
+        console.log('Comments system ready');
+    }
+    
+    syncWithTestimonials();
     }
     
     // Smooth Scrolling for Anchor Links
