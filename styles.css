@@ -2131,3 +2131,51 @@ p {
     color: var(--primary);
     margin: 0;
 }
+/* ========== DERVUX LOGO STYLES ========== */
+.logo-link {
+    text-decoration: none;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
+.dervux-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow);
+}
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.logo-tagline {
+    font-size: 0.7rem;
+    color: var(--gray);
+    font-weight: 500;
+    margin-top: -5px;
+    letter-spacing: 1px;
+}
