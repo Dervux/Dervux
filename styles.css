@@ -2109,3 +2109,25 @@ p {
         left: 10px;
     }
 }
+/* ========== LOGO LINK STYLES ========== */
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.logo-link:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+}
+
+.logo-link:active {
+    transform: scale(0.98);
+}
+
+/* Ensure the logo text stays the right color */
+.logo-link h1 {
+    color: var(--primary);
+    margin: 0;
+}
